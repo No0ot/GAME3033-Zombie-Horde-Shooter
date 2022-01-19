@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 38b69d5da93a4a64fa397c4031d18d3f
+guid: 000b441c45ea3da41aa762dd858800b6
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Jump
+    second: WalkStrafeLeft
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,18 +35,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Jump
+      name: WalkStrafeLeft
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 29
+      lastFrame: 39
       wrapMode: 0
-      orientationOffsetY: -60
+      orientationOffsetY: -65
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 0

@@ -15,15 +15,23 @@ public class MovementComponent : MonoBehaviour
     //componenets
     private PlayerController controller;
     Rigidbody rigidbody;
+    Animator animator;
 
     //references
     Vector2 inputVector = Vector2.zero;
     Vector3 moveDirection = Vector3.zero;
 
+    // animator hashes
+    public readonly int movementXHash = Animator.StringToHash("MoveX");
+    public readonly int movementYHash = Animator.StringToHash("MoveY");
+    public readonly int isRunningHash = Animator.StringToHash("IsRunning");
+    public readonly int isJumpingHash = Animator.StringToHash("IsJumping");
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         controller = GetComponent<PlayerController>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -46,17 +54,24 @@ public class MovementComponent : MonoBehaviour
     public void OnMovement(InputValue value)
     {
         inputVector = value.Get<Vector2>();
+        animator.SetFloat(movementXHash, inputVector.x);
+        animator.SetFloat(movementYHash, inputVector.y);
     }
 
     public void OnRun(InputValue value)
     {
         controller.isRunning = value.isPressed;
+        animator.SetBool(isRunningHash, controller.isRunning);
     }
 
     public void OnJump(InputValue value)
     {
-        controller.isJumping = value.isPressed;
-        rigidbody.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
+        if (!controller.isJumping)
+        {
+            controller.isJumping = value.isPressed;
+            rigidbody.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
+            animator.SetBool(isJumpingHash, controller.isJumping);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -64,6 +79,7 @@ public class MovementComponent : MonoBehaviour
         if (!collision.gameObject.CompareTag("Ground") && !controller.isJumping) return;
         {
             controller.isJumping = false;
+            animator.SetBool(isJumpingHash, controller.isJumping);
         }
     }
 }
