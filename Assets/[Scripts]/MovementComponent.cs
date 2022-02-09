@@ -107,8 +107,16 @@ public class MovementComponent : MonoBehaviour
     public void OnAttack(InputValue value)
     {
             controller.isAttacking = value.isPressed;
+        if (!controller.isAttacking)
+        {
+            if (controller.energy > 20f)
+            {
+                controller.energy -= 20f;
+            }
+            else
+                controller.isAttacking = false;
+        }
             animator.SetBool(isAttackingHash, controller.isAttacking);
- 
     }
 
     public void OnJump(InputValue value)
