@@ -16,6 +16,10 @@ public class MovementComponent : MonoBehaviour
     private PlayerController controller;
     Rigidbody rigidbody;
     Animator animator;
+    public RuntimeAnimatorController twohanded;
+    public RuntimeAnimatorController swordnboard;
+    bool shield = true;
+    
 
     //references
     Vector2 inputVector = Vector2.zero;
@@ -36,6 +40,7 @@ public class MovementComponent : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         controller = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
+        animator.runtimeAnimatorController = swordnboard;
     }
 
     private void Start()
@@ -106,7 +111,7 @@ public class MovementComponent : MonoBehaviour
 
     public void OnAttack(InputValue value)
     {
-            controller.isAttacking = value.isPressed;
+        controller.isAttacking = value.isPressed;
         if (!controller.isAttacking)
         {
             if (controller.energy > 20f)
@@ -126,6 +131,20 @@ public class MovementComponent : MonoBehaviour
             controller.isJumping = value.isPressed;
             rigidbody.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
             animator.SetBool(isJumpingHash, controller.isJumping);
+        }
+    }
+
+    public void OnSwitchWeapon(InputValue value)
+    {
+        if (shield)
+        {
+            animator.runtimeAnimatorController = twohanded;
+            shield = false;
+        }
+        else
+        {
+            animator.runtimeAnimatorController = swordnboard;
+            shield = true;
         }
     }
 

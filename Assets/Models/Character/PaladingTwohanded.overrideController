@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PaladingTwohanded
+  m_Controller: {fileID: 9100000, guid: 698d60cf43c29ca42b4b3054d8f7bb2b, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 38b69d5da93a4a64fa397c4031d18d3f, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 2d80f6ec650d8294e8422026b76d5a56, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 382fe11426d33ae45b1c03e8ee876f75, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: be5579875d311fa48a87ac334d2b87d0, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 0c716cba89e84894ab2d380b942b3e6a, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 827123c5323fc1a42964c18e965e6fef, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 1dbff0932be834e4dbdeb493b457db99, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: c9c97796dce29a34c9135d027285435b, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 7f5023607ce8b4a4d9579f5eb58b9bde, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 3d9c04f0e8534774ba7ec7871a67fba3, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 000b441c45ea3da41aa762dd858800b6, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: ed47e94f6b3ea034eba328d38710ff91, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: da074e331209ddf4aa350d86b8ecf912, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: d525a2ac3842c0145a1acd762805bc9b, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 90e84292db6a2434ab8d8549b2447fc5, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 4fbb4dad45dc230418a1ce8607f0b1d6, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: b46582393c7911d46836a530a2cf32bd, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 3c2d08f2682718e4a95f4b634efd01c6, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: ebe65dafb12c3af45ac5b55bbb7629fe, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: fd4facc28aaa70c42b72b9a3e0f8a437, type: 3}

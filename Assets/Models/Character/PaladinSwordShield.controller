@@ -392,7 +392,7 @@ AnimatorStateMachine:
     m_Position: {x: 340, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -998704025090759309}
-    m_Position: {x: 630, y: 200, z: 0}
+    m_Position: {x: 580, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7922582644872201518}
     m_Position: {x: 320, y: 250, z: 0}
@@ -403,7 +403,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ExitPosition: {x: 890, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 5337977461029497730}
 --- !u!1102 &-3535626542878786434
@@ -798,7 +798,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PaladinAnimationController
+  m_Name: PaladinSwordShield
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: MoveX
