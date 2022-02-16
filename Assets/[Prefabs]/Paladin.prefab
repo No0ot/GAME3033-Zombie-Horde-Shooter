@@ -1635,7 +1635,7 @@ GameObject:
   - component: {fileID: 7740229410691697445}
   m_Layer: 0
   m_Name: Paladin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1668,7 +1668,7 @@ Animator:
   m_GameObject: {fileID: 7456499770742553532}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 57877f831f5d2a94ba77cedcca58ce31, type: 3}
-  m_Controller: {fileID: 9100000, guid: 698d60cf43c29ca42b4b3054d8f7bb2b, type: 2}
+  m_Controller: {fileID: 9100000, guid: aee098da073e27241bdcc101c201f545, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1714,7 +1714,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7456499770742553532}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5e1097e55900b6040834f813582078f7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.4
@@ -1754,6 +1754,10 @@ MonoBehaviour:
   isJumping: 0
   isRunning: 0
   isBlocking: 0
+  energy: 0
+  maxEnergy: 0
+  health: 0
+  maxHealth: 0
 --- !u!114 &6582535046666935707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1766,9 +1770,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b562200c378bfc48a6f368c2281bed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
-  runSpeed: 5
+  walkSpeed: 5
+  runSpeed: 10
   jumpForce: 5
+  twohanded: {fileID: 22100000, guid: 937dc6ffe898a2645aefcc1214987b36, type: 2}
+  swordnboard: {fileID: 22100000, guid: 937dc6ffe898a2645aefcc1214987b36, type: 2}
   followTarget: {fileID: 7762981832901304452}
 --- !u!114 &7740229410691697445
 MonoBehaviour:
@@ -1782,10 +1788,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96581b78374cda3499cc9487c0ce06e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToSpawn: {fileID: 5233128585912500925, guid: 0cce36f58bf7eaa498ce2c2122d0ff50, type: 3}
-  leftWeaponSpawn: {fileID: 0}
+  oneHandedSword: {fileID: 5233128585912500925, guid: 0cce36f58bf7eaa498ce2c2122d0ff50, type: 3}
+  shield: {fileID: 5724680658837334948, guid: 34a1e48abd5bd244bb40f2bf767d0e8c, type: 3}
+  twoHandedSword: {fileID: 1710555284860910137, guid: 0ffaba2711dcddb44b57188a65107199, type: 3}
   rightSocketLocation: {fileID: 7762981832980914886}
   leftSocketLocation: {fileID: 7762981832171132725}
+  rightHandEquip: {fileID: 0}
+  leftHandEquip: {fileID: 0}
 --- !u!1 &7508310076505320839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,13 +1910,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7762981832171132725}
-  m_LocalRotation: {x: 0.05721816, y: -0.28683075, z: -0.9394878, w: 0.17837246}
-  m_LocalPosition: {x: 0.020764787, y: 0.017062254, z: -0.07290655}
-  m_LocalScale: {x: 25.000013, y: 25, z: 25}
+  m_LocalRotation: {x: -0.07639876, y: -0.2288741, z: -0.95965505, w: 0.14436777}
+  m_LocalPosition: {x: 0.01688147, y: 0.024376208, z: -0.08472743}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1918078371749620506}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -17.94, y: -0.757, z: -178.647}
+  m_LocalEulerAnglesHint: {x: -27.474, y: 5.209, z: -164.164}
 --- !u!1 &7762981832901304452
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,13 +1970,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7762981832980914886}
-  m_LocalRotation: {x: 0.54998654, y: 0.27581784, z: 0.16356584, w: 0.7711586}
-  m_LocalPosition: {x: 0.008, y: -0.022, z: 0.027}
+  m_LocalRotation: {x: 0.7486917, y: -0.12694742, z: -0.19086969, w: 0.6220241}
+  m_LocalPosition: {x: 0.09, y: -0.03, z: 0.06}
   m_LocalScale: {x: 0.5, y: 0.8, z: 0.5}
   m_Children: []
   m_Father: {fileID: 943307366962751616}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 49.29, y: 68.137, z: 58.424}
+  m_LocalEulerAnglesHint: {x: 118, y: 70.94, z: 65.6}
 --- !u!1 &7830331788241699472
 GameObject:
   m_ObjectHideFlags: 0

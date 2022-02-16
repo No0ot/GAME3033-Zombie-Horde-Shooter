@@ -40,7 +40,7 @@ public class MovementComponent : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         controller = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = swordnboard;
+        //animator.runtimeAnimatorController = swordnboard;
     }
 
     private void Start()
@@ -57,9 +57,17 @@ public class MovementComponent : MonoBehaviour
 
             moveDirection = transform.forward * inputVector.y + transform.right * inputVector.x;
             float currentSpeed = controller.isRunning ? runSpeed : walkSpeed;
-            Vector3 movementDirection = moveDirection * (currentSpeed * Time.deltaTime);
-            transform.position += movementDirection;
-        
+            Vector3 movementDirection = moveDirection * (currentSpeed);
+        //transform.position += movementDirection;
+        if (rigidbody.velocity.magnitude < (currentSpeed / 2))
+        {
+            rigidbody.AddForce(movementDirection, ForceMode.Force);
+        }
+
+       float relativeZVelocity = Vector3.Dot(rigidbody.velocity.normalized, transform.forward);
+       float relativeXVelocity = Vector3.Dot(rigidbody.velocity.normalized, transform.right);
+
+
         followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.x, Vector3.up);
         followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.y, Vector3.left);
 
@@ -83,6 +91,11 @@ public class MovementComponent : MonoBehaviour
 
         followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
 
+        Vector3 temp = rigidbody.velocity;
+        temp.Normalize();
+
+        animator.SetFloat(movementXHash, relativeXVelocity);
+        animator.SetFloat(movementYHash, relativeZVelocity);
     }
 
     public void OnLook(InputValue value)
@@ -93,8 +106,7 @@ public class MovementComponent : MonoBehaviour
     public void OnMovement(InputValue value)
     {
         inputVector = value.Get<Vector2>();
-        animator.SetFloat(movementXHash, inputVector.x);
-        animator.SetFloat(movementYHash, inputVector.y);
+        
     }
 
     public void OnRun(InputValue value)
@@ -129,7 +141,7 @@ public class MovementComponent : MonoBehaviour
         if (!controller.isJumping)
         {
             controller.isJumping = value.isPressed;
-            rigidbody.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
+            rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
             animator.SetBool(isJumpingHash, controller.isJumping);
         }
     }
