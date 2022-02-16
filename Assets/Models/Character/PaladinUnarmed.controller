@@ -500,9 +500,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.44606906
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.6839311
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -889,7 +889,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: AttackingMask
     m_StateMachine: {fileID: -1354450305085434412}
-    m_Mask: {fileID: 31900000, guid: 593c96f5956065048b3e822eaa6eed33, type: 2}
+    m_Mask: {fileID: 31900000, guid: a60f9f4f93d227e47ab57f0321cfef9a, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
