@@ -1,1 +1,1 @@
-Zombie Horde Shooter - MidPoint Checkin
+Zombie Horde Shooter - Midpoint Check-in
