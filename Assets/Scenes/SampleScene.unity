@@ -7286,6 +7286,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5317282307511388387, guid: 8494a9965bbd1004c8721a1648bd9b30, type: 3}
+      propertyPath: walkSpeed
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8494a9965bbd1004c8721a1648bd9b30, type: 3}
 --- !u!1001 &8284777881634227377
@@ -7302,10 +7306,6 @@ PrefabInstance:
     - target: {fileID: 3375391198044797357, guid: d591018b37dc41f49a8dd97303df258a, type: 3}
       propertyPath: m_Name
       value: Zombie
-      objectReference: {fileID: 0}
-    - target: {fileID: 3375391198044797357, guid: d591018b37dc41f49a8dd97303df258a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6807481278802602527, guid: d591018b37dc41f49a8dd97303df258a, type: 3}
       propertyPath: m_RootOrder

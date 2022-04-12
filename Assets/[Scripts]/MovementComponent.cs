@@ -64,8 +64,8 @@ public class MovementComponent : MonoBehaviour
             rigidbody.AddForce(movementDirection, ForceMode.Force);
         }
 
-       float relativeZVelocity = Vector3.Dot(rigidbody.velocity.normalized, transform.forward);
-       float relativeXVelocity = Vector3.Dot(rigidbody.velocity.normalized, transform.right);
+       float relativeZVelocity = Vector3.Dot(rigidbody.velocity, transform.forward);
+       float relativeXVelocity = Vector3.Dot(rigidbody.velocity, transform.right);
 
 
         followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.x, Vector3.up);
