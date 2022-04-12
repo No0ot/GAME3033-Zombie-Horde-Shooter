@@ -19,7 +19,8 @@ public class MovementComponent : MonoBehaviour
     public RuntimeAnimatorController twohanded;
     public RuntimeAnimatorController swordnboard;
     bool shield = true;
-    
+
+    public bool applyMeshMotion;
 
     //references
     Vector2 inputVector = Vector2.zero;
@@ -37,9 +38,9 @@ public class MovementComponent : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponentInChildren<Rigidbody>();
         controller = GetComponent<PlayerController>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         //animator.runtimeAnimatorController = swordnboard;
     }
 
@@ -48,9 +49,8 @@ public class MovementComponent : MonoBehaviour
         
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
- 
             if (controller.isJumping) return;
             if (!(inputVector.magnitude > 0))
                 moveDirection = Vector3.zero;
@@ -96,6 +96,11 @@ public class MovementComponent : MonoBehaviour
 
         animator.SetFloat(movementXHash, relativeXVelocity);
         animator.SetFloat(movementYHash, relativeZVelocity);
+
+        Vector3 meshPos = animator.gameObject.transform.GetChild(0).transform.GetChild(0).transform.position;
+
+        //if(applyMeshMotion)
+        //    transform.position = new Vector3(meshPos.x, transform.position.y, meshPos.z);
     }
 
     public void OnLook(InputValue value)
@@ -132,6 +137,7 @@ public class MovementComponent : MonoBehaviour
             }
             else
                 controller.isAttacking = false;
+
         }
             animator.SetBool(isAttackingHash, controller.isAttacking);
     }
@@ -167,5 +173,23 @@ public class MovementComponent : MonoBehaviour
             controller.isJumping = false;
             animator.SetBool(isJumpingHash, controller.isJumping);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("EnemyAttack"))
+        {
+            Debug.Log("zombie hit");
+        }
+    }
+
+    public void AddImpulse(float force)
+    {
+        rigidbody.AddForce(transform.forward * force, ForceMode.Impulse);
+    }
+
+    public void TurnOffMotion()
+    {
+        applyMeshMotion = false;
     }
 }

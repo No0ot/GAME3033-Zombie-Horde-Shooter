@@ -2,19 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
     public bool isAttacking;
     public bool isReloading;
     public bool isJumping;
     public bool isRunning;
     public bool isBlocking;
-
-    public float energy;
-    public float maxEnergy;
-
-    public float health;
-    public float maxHealth;
 
     private void Start()
     {

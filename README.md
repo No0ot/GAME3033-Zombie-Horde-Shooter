@@ -1,1 +1,1 @@
-Zombie Horde Shooter - Week 2 Lab Submission
+Zombie Horde Shooter - Midpoint Check-in

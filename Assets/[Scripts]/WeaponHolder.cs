@@ -19,19 +19,15 @@ public class WeaponHolder : MonoBehaviour
 
     public GameObject rightHandEquip;
     public GameObject leftHandEquip;
+
+    Weapon heldWeapon;
     // Start is called before the first frame update
     void Start()
     {
         //GameObject spawnedWeapon = Instantiate(weaponToSpawn, rightSocketLocation.transform);
        // GameObject leftspawnedWeapon = Instantiate(leftWeaponSpawn, leftSocketLocation.transform.position, leftSocketLocation.transform.rotation, leftSocketLocation.transform);
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         movement = GetComponent<MovementComponent>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -65,12 +61,13 @@ public class WeaponHolder : MonoBehaviour
                 leftspawnedWeapon = Instantiate(shield, leftSocketLocation.transform.position, leftSocketLocation.transform.rotation, leftSocketLocation.transform);
                 leftHandEquip = leftspawnedWeapon;
                 animator.runtimeAnimatorController = movement.swordnboard;
-
+                heldWeapon = spawnedWeapon.GetComponent<Weapon>();
                 break;
             case PickupType.WEAPON_GREATSWORD:
                 spawnedWeapon = Instantiate(twoHandedSword, rightSocketLocation.transform);
                 rightHandEquip = spawnedWeapon;
                 animator.runtimeAnimatorController = movement.twohanded;
+                heldWeapon = spawnedWeapon.GetComponent<Weapon>();
                 break;
         }
     }
