@@ -30,4 +30,22 @@ public class EnemySpawner : MonoBehaviour
 
         canSpawn = true;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            canSpawn = false;
+            StopAllCoroutines();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            canSpawn = true;
+            
+        }
+    }
 }

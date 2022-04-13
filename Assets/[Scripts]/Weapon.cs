@@ -9,8 +9,10 @@ public class Weapon : MonoBehaviour
     public Transform player;
     public float damage;
 
-    public void Attack(float force, float damage)
+    public void Attack(float newforce, float newdamage)
     {
+        force = newforce;
+        damage = newdamage;
         Debug.Log(force);
         Debug.Log(damage);
         collider.enabled = true;

@@ -99,11 +99,6 @@ public class MovementComponent : MonoBehaviour
 
         animator.SetFloat(movementXHash, relativeXVelocity);
         animator.SetFloat(movementYHash, relativeZVelocity);
-
-        Vector3 meshPos = animator.gameObject.transform.GetChild(0).transform.GetChild(0).transform.position;
-
-        //if(applyMeshMotion)
-        //    transform.position = new Vector3(meshPos.x, transform.position.y, meshPos.z);
     }
 
     public void OnLook(InputValue value)
@@ -149,10 +144,15 @@ public class MovementComponent : MonoBehaviour
     {
         if (!controller.isJumping)
         {
-            controller.isJumping = value.isPressed;
-            rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-            animator.SetBool(isJumpingHash, controller.isJumping);
+            
+            animator.SetBool(isJumpingHash, value.isPressed);
         }
+    }
+
+    public void Jump()
+    {
+        controller.isJumping = true;
+        rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
     public void OnSwitchWeapon(InputValue value)
@@ -174,7 +174,7 @@ public class MovementComponent : MonoBehaviour
         if (!collision.gameObject.CompareTag("Ground") && !controller.isJumping) return;
         {
             controller.isJumping = false;
-            animator.SetBool(isJumpingHash, controller.isJumping);
+            animator.SetBool(isJumpingHash, false);
         }
     }
 

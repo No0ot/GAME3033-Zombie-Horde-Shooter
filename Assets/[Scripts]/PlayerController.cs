@@ -13,6 +13,7 @@ public class PlayerController : Entity
     private void Awake()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
     private void Start()
     {
