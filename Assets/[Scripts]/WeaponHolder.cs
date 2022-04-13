@@ -19,8 +19,6 @@ public class WeaponHolder : MonoBehaviour
 
     public GameObject rightHandEquip;
     public GameObject leftHandEquip;
-
-    Weapon heldWeapon;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,14 +59,33 @@ public class WeaponHolder : MonoBehaviour
                 leftspawnedWeapon = Instantiate(shield, leftSocketLocation.transform.position, leftSocketLocation.transform.rotation, leftSocketLocation.transform);
                 leftHandEquip = leftspawnedWeapon;
                 animator.runtimeAnimatorController = movement.swordnboard;
-                heldWeapon = spawnedWeapon.GetComponent<Weapon>();
+                rightHandEquip.GetComponent<Weapon>().player = transform;
                 break;
             case PickupType.WEAPON_GREATSWORD:
                 spawnedWeapon = Instantiate(twoHandedSword, rightSocketLocation.transform);
                 rightHandEquip = spawnedWeapon;
                 animator.runtimeAnimatorController = movement.twohanded;
-                heldWeapon = spawnedWeapon.GetComponent<Weapon>();
+                rightHandEquip.GetComponent<Weapon>().player = transform;
                 break;
+        }
+    }
+
+    public void EquippedWeaponAttack(string forceDamage)
+    {
+        string[] tempstring = forceDamage.Split(';');
+        if (rightHandEquip)
+        {
+            Weapon temp = rightHandEquip.GetComponent<Weapon>();
+            temp.Attack(int.Parse(tempstring[0]), int.Parse(tempstring[1]));
+        }
+    }
+
+    public void EquppedWeaponStopAttacking()
+    {
+        if (rightHandEquip)
+        {
+            Weapon temp = rightHandEquip.GetComponent<Weapon>();
+            temp.StopAttacking();
         }
     }
 }

@@ -59,9 +59,12 @@ public class MovementComponent : MonoBehaviour
             float currentSpeed = controller.isRunning ? runSpeed : walkSpeed;
             Vector3 movementDirection = moveDirection * (currentSpeed);
         //transform.position += movementDirection;
-        if (rigidbody.velocity.magnitude < (currentSpeed / 2))
+        if (!controller.isAttacking)
         {
-            rigidbody.AddForce(movementDirection, ForceMode.Force);
+            if (rigidbody.velocity.magnitude < (currentSpeed / 2))
+            {
+                rigidbody.AddForce(movementDirection, ForceMode.Force);
+            }
         }
 
        float relativeZVelocity = Vector3.Dot(rigidbody.velocity, transform.forward);

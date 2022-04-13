@@ -9,38 +9,66 @@ public class EnemyScript : Entity
     public Transform player;
     NavMeshAgent agent;
     float rotationSpeed = 5.0f;
+    Rigidbody rigidbody;
+    bool canBeHit = true;
+    bool isDead = false;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
+        health = maxHealth;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("Speed", agent.velocity.magnitude);
-
-        if (Vector3.Distance(player.position, transform.position) < 1.5f)
+        if (!isDead)
         {
-            agent.isStopped = true;
-            Vector3 targetDirection = player.position - transform.position;
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, rotationSpeed * Time.deltaTime, 0.0f);
-            transform.rotation = Quaternion.LookRotation(newDirection);
-
-            animator.SetBool("IsAttacking", true);
+            animator.SetFloat("Speed", agent.velocity.magnitude);
         }
-        else
+
+        if(health <= 0)
         {
-            agent.isStopped = false;
-            agent.SetDestination(player.position);
+            isDead = true;
             animator.SetBool("IsAttacking", false);
+            animator.SetBool("IsDead", true);
         }
+    }
+
+    public void GetHit(Vector3 forceDirection, float damage)
+    {
+        if (canBeHit)
+        {
+            canBeHit = false;
+            agent.isStopped = true;
+            agent.enabled = false;
+            rigidbody.isKinematic = false;
+            TakeDamage(damage);
+
+            rigidbody.AddForce(forceDirection, ForceMode.Impulse);
+            animator.SetTrigger("GetHit");
+        }
+    }
+
+    public void RecoverFromBeingHit()
+    {
+        agent.enabled = true;
+        agent.isStopped = false;
+        rigidbody.isKinematic = true;
+        canBeHit = true;
+    }
+
+    public void RotateToTarget(GameObject target)
+    {
+        Vector3 targetDirection = target.transform.position - transform.position;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, rotationSpeed * Time.deltaTime, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
+    }
+
+    public void SetAnimatorIsAttacking(bool tf)
+    {
+        animator.SetBool("IsAttacking", tf);
     }
 }
 

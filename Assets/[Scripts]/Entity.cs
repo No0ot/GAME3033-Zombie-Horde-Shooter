@@ -10,14 +10,21 @@ public class Entity : MonoBehaviour
     public float health;
     public float maxHealth;
 
-    public void GetHit(float damage)
-    {
-        TakeDamage(damage);
-        //Knockback;
-    }
+
+
+    //public void GetHit(float damage)
+    //{
+    //    TakeDamage(damage);
+    //    //Knockback;
+    //}
 
     public void TakeDamage(float damage)
     {
         health = Mathf.Clamp(health - damage, 0f, maxHealth);
+    }
+
+    public void DeleteEntity()
+    {
+        Destroy(gameObject);
     }
 }

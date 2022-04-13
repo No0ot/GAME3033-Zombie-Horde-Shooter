@@ -544,7 +544,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 5233128585912500925}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.15
   m_Height: 1.5
   m_Direction: 1
@@ -561,6 +561,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e908d021184834ea76a38020b2ca62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 4226572376715605838}
+  force: 5
+  player: {fileID: 0}
+  damage: 10
 --- !u!1 &5593832023739347446
 GameObject:
   m_ObjectHideFlags: 0

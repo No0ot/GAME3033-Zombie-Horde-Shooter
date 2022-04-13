@@ -10,6 +10,10 @@ public class PlayerController : Entity
     public bool isRunning;
     public bool isBlocking;
 
+    private void Awake()
+    {
+        Cursor.visible = false;
+    }
     private void Start()
     {
         maxEnergy = 100f;
