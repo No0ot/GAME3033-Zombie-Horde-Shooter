@@ -7,7 +7,7 @@ public class EnemyScript : Entity
 {
     Animator animator;
     public Transform player;
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     float rotationSpeed = 5.0f;
     Rigidbody rigidbody;
     bool canBeHit = true;

@@ -26,6 +26,7 @@ public class EnemySpawner : MonoBehaviour
 
         temp.transform.SetParent(transform);
         temp.transform.localPosition = Vector3.zero;
+        temp.GetComponent<EnemyScript>().agent.enabled = true;
 
         canSpawn = true;
     }
