@@ -22,9 +22,4 @@ public class Entity : MonoBehaviour
     {
         health = Mathf.Clamp(health - damage, 0f, maxHealth);
     }
-
-    public void DeleteEntity()
-    {
-        Destroy(gameObject);
-    }
 }

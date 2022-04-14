@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     public List<GameObject> enemyList = new List<GameObject>();
 
     public int maxZombieCount;
+    public int numActiveZombies;
 
     private void Awake()
     {
@@ -18,8 +19,24 @@ public class EnemyManager : MonoBehaviour
     }
     public GameObject GetEnemy()
     {
+        numActiveZombies++;
+        foreach (GameObject enemy in enemyList)
+        {
+            if (!enemy.activeInHierarchy)
+            {
+                return enemy;
+            }
+            else
+                return AddEnemy();
+        }
+        return AddEnemy();
+    }
+
+    GameObject AddEnemy()
+    {
         GameObject temp = Instantiate(zombiePrefab);
         enemyList.Add(temp);
+        temp.SetActive(false);
         return temp;
     }
 

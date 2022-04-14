@@ -70,5 +70,11 @@ public class EnemyScript : Entity
     {
         animator.SetBool("IsAttacking", tf);
     }
+
+    public void DeleteEntity()
+    {
+        EnemyManager.instance.numActiveZombies--;
+        gameObject.SetActive(false);
+    }
 }
 

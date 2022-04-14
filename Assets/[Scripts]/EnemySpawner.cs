@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if(canSpawn && EnemyManager.instance.enemyList.Count < EnemyManager.instance.maxZombieCount)
+        if(canSpawn && EnemyManager.instance.numActiveZombies < EnemyManager.instance.maxZombieCount)
         {
             StartCoroutine(SpawnZombie());
         }
@@ -21,13 +21,14 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnZombie()
     {
         canSpawn = false;
-        yield return new WaitForSeconds(10f);
         GameObject temp = EnemyManager.instance.GetEnemy();
 
+        temp.SetActive(true);
         temp.transform.SetParent(transform);
         temp.transform.localPosition = Vector3.zero;
         temp.GetComponent<EnemyScript>().agent.enabled = true;
 
+        yield return new WaitForSeconds(10f);
         canSpawn = true;
     }
 

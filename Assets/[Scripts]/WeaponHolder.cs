@@ -26,6 +26,7 @@ public class WeaponHolder : MonoBehaviour
        // GameObject leftspawnedWeapon = Instantiate(leftWeaponSpawn, leftSocketLocation.transform.position, leftSocketLocation.transform.rotation, leftSocketLocation.transform);
         animator = GetComponentInChildren<Animator>();
         movement = GetComponent<MovementComponent>();
+        controller = GetComponent<PlayerController>();
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -87,5 +88,6 @@ public class WeaponHolder : MonoBehaviour
             Weapon temp = rightHandEquip.GetComponent<Weapon>();
             temp.StopAttacking();
         }
+            controller.isAttacking = false;
     }
 }
