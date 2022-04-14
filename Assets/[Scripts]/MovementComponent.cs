@@ -122,18 +122,19 @@ public class MovementComponent : MonoBehaviour
 
     public void OnAttack(InputValue value)
     {
-        controller.isAttacking = value.isPressed;
         if (!controller.isAttacking)
         {
-            if (controller.energy > 20f)
+            controller.isAttacking = value.isPressed;
+            if (controller.energy > 10f)
             {
-                controller.energy -= 20f;
+                controller.energy -= 10f;
+                animator.SetTrigger("IsAttacking");
             }
             else
                 controller.isAttacking = false;
 
         }
-        animator.SetTrigger("IsAttacking");
+        
     }
 
     public void OnJump(InputValue value)
@@ -167,14 +168,11 @@ public class MovementComponent : MonoBehaviour
 
     public void OnInteract(InputValue value)
     {
-        Debug.Log("interact");
         if(interactObject)
         {
-            Debug.Log("interact object good");
             Well temp = interactObject.GetComponent<Well>();
             if(temp.canUse)
             {
-                Debug.Log("used");
                 controller.TakeDamage(-25);
                 temp.canUse = false;
                 temp.Use();
@@ -195,12 +193,22 @@ public class MovementComponent : MonoBehaviour
     {
         if(other.gameObject.CompareTag("EnemyAttack"))
         {
-            Vector3 direction = transform.position - other.GetComponent<EnemyHand>().parent.transform.position;
-            direction = direction.normalized * 8;
+            if (!controller.isBlocking)
+            {
+                Vector3 direction = transform.position - other.GetComponent<EnemyHand>().parent.transform.position;
+                direction = direction.normalized * 8;
 
-            rigidbody.AddForce(direction, ForceMode.Impulse);
-            controller.TakeDamage(5);
-            Debug.Log("zombie hit");
+                rigidbody.AddForce(direction, ForceMode.Impulse);
+                controller.TakeDamage(5);
+                Debug.Log("zombie hit");
+            }
+            else
+            {
+                Vector3 direction = transform.position - other.GetComponent<EnemyHand>().parent.transform.position;
+                direction = direction.normalized * 5;
+                EnemyScript temp = other.GetComponent<EnemyHand>().parent.GetComponent<EnemyScript>();
+                temp.GetHit(-direction, 0);
+            }
         }
     }
 

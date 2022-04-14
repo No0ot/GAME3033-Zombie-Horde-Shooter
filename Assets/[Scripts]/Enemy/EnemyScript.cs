@@ -11,6 +11,7 @@ public class EnemyScript : Entity
     float rotationSpeed = 5.0f;
     Rigidbody rigidbody;
     bool canBeHit = true;
+    public bool canAttack = true;
     bool isDead = false;
 
     private void Awake()
@@ -19,6 +20,7 @@ public class EnemyScript : Entity
         agent = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
         health = maxHealth;
+        canAttack = true;
     }
     // Update is called once per frame
     void Update()
@@ -40,6 +42,9 @@ public class EnemyScript : Entity
     {
         if (canBeHit)
         {
+            GetComponent<EnemyAttackScript>().StopAttacking();
+            animator.SetBool("IsAttacking", false);
+            canAttack = false;
             canBeHit = false;
             agent.isStopped = true;
             agent.enabled = false;
@@ -57,6 +62,7 @@ public class EnemyScript : Entity
         agent.isStopped = false;
         rigidbody.isKinematic = true;
         canBeHit = true;
+        canAttack = true;
     }
 
     public void RotateToTarget(GameObject target)

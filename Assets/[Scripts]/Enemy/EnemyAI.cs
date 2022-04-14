@@ -94,8 +94,12 @@ public class EnemyAI : MonoBehaviour
         {
             agent.isStopped = true;
             controller.RotateToTarget(target);
-
-            controller.SetAnimatorIsAttacking(true);
+            if (controller.canAttack)
+            {
+                controller.SetAnimatorIsAttacking(true);
+            }
+            else
+                controller.SetAnimatorIsAttacking(false);
         }
         if(Vector3.Distance(target.transform.position, transform.position) > 1.5f)
         {

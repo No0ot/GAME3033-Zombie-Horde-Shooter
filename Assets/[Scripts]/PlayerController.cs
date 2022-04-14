@@ -10,6 +10,8 @@ public class PlayerController : Entity
     public bool isRunning;
     public bool isBlocking;
 
+    public float energyRegenRate;
+
     private void Awake()
     {
         Cursor.visible = false;
@@ -27,9 +29,7 @@ public class PlayerController : Entity
     {
         if(energy < 100f)
         {
-            energy += 2.0f * Time.deltaTime;
-            if (energy > 100f)
-                energy = maxEnergy;
+            energy = Mathf.Clamp(energy + energyRegenRate * Time.deltaTime, 0.0f, 100f);
         }
     }
 }
