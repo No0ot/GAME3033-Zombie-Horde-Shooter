@@ -27,6 +27,7 @@ public class MovementComponent : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     Vector2 lookInput = Vector2.zero;
     public GameObject followTarget;
+    public GameObject interactObject;
 
     // animator hashes
     public readonly int movementXHash = Animator.StringToHash("MoveX");
@@ -42,11 +43,6 @@ public class MovementComponent : MonoBehaviour
         controller = GetComponent<PlayerController>();
         animator = GetComponentInChildren<Animator>();
         //animator.runtimeAnimatorController = swordnboard;
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -137,7 +133,7 @@ public class MovementComponent : MonoBehaviour
                 controller.isAttacking = false;
 
         }
-            animator.SetBool(isAttackingHash, controller.isAttacking);
+        animator.SetTrigger("IsAttacking");
     }
 
     public void OnJump(InputValue value)
@@ -169,9 +165,26 @@ public class MovementComponent : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnInteract(InputValue value)
     {
-        if (!collision.gameObject.CompareTag("Ground") && !controller.isJumping) return;
+        Debug.Log("interact");
+        if(interactObject)
+        {
+            Debug.Log("interact object good");
+            Well temp = interactObject.GetComponent<Well>();
+            if(temp.canUse)
+            {
+                Debug.Log("used");
+                controller.TakeDamage(-25);
+                temp.canUse = false;
+                temp.Use();
+            }
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (!collision.gameObject.CompareTag("Ground"));
         {
             controller.isJumping = false;
             animator.SetBool(isJumpingHash, false);
@@ -182,6 +195,11 @@ public class MovementComponent : MonoBehaviour
     {
         if(other.gameObject.CompareTag("EnemyAttack"))
         {
+            Vector3 direction = transform.position - other.GetComponent<EnemyHand>().parent.transform.position;
+            direction = direction.normalized * 8;
+
+            rigidbody.AddForce(direction, ForceMode.Impulse);
+            controller.TakeDamage(5);
             Debug.Log("zombie hit");
         }
     }
