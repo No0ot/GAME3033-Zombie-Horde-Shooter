@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum PickupType
 {
-    CONSUMABLE,
+    NONE,
     WEAPON_SWORDNBOARD,
     WEAPON_GREATSWORD
 }
@@ -20,7 +20,8 @@ public class ItemPickup : MonoBehaviour
             WeaponHolder temp = other.GetComponent<WeaponHolder>();
             switch (type)
             {
-                case PickupType.CONSUMABLE:
+                case PickupType.NONE:
+                    temp.EquipWeapon(type);
                     break;
                 case PickupType.WEAPON_SWORDNBOARD:
                     temp.EquipWeapon(type);

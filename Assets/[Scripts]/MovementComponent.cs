@@ -16,6 +16,7 @@ public class MovementComponent : MonoBehaviour
     private PlayerController controller;
     Rigidbody rigidbody;
     Animator animator;
+    public RuntimeAnimatorController unarmed;
     public RuntimeAnimatorController twohanded;
     public RuntimeAnimatorController swordnboard;
     bool shield = true;
@@ -124,9 +125,9 @@ public class MovementComponent : MonoBehaviour
     {
         if (!controller.isAttacking)
         {
-            controller.isAttacking = value.isPressed;
             if (controller.energy > 10f)
             {
+                controller.isAttacking = true;
                 controller.energy -= 10f;
                 animator.SetTrigger("IsAttacking");
             }

@@ -9,6 +9,14 @@ public class Weapon : MonoBehaviour
     public Transform player;
     public float damage;
 
+    public float durability;
+    public float durabilityMax;
+
+    private void Awake()
+    {
+        durability = durabilityMax;
+    }
+
     public void Attack(float newforce, float newdamage)
     {
         force = newforce;
@@ -32,8 +40,16 @@ public class Weapon : MonoBehaviour
 
             EnemyScript temp = other.GetComponent<EnemyScript>();
             temp.GetHit(direction, damage);
-            //other.
-            Debug.Log("Hit");
+            DamageWeapon();
+        }
+    }
+
+    void DamageWeapon()
+    {
+        durability -= 5;
+        if(durability <= 0)
+        {
+            player.GetComponent<WeaponHolder>().EquipWeapon(PickupType.NONE);
         }
     }
 }

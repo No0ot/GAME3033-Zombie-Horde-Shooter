@@ -19,14 +19,22 @@ public class WeaponHolder : MonoBehaviour
 
     public GameObject rightHandEquip;
     public GameObject leftHandEquip;
+
+    public delegate void EquipNewWeapon(PickupType type);
+    public EquipNewWeapon equipNewWeapon;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //GameObject spawnedWeapon = Instantiate(weaponToSpawn, rightSocketLocation.transform);
        // GameObject leftspawnedWeapon = Instantiate(leftWeaponSpawn, leftSocketLocation.transform.position, leftSocketLocation.transform.rotation, leftSocketLocation.transform);
         animator = GetComponentInChildren<Animator>();
         movement = GetComponent<MovementComponent>();
         controller = GetComponent<PlayerController>();
+    }
+    private void Start()
+    {
+        EquipWeapon(PickupType.NONE);
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -49,11 +57,24 @@ public class WeaponHolder : MonoBehaviour
         if(leftHandEquip)
         {
             Destroy(leftHandEquip.gameObject);
-
         }
 
         switch (type)
         {
+            case PickupType.NONE:
+                animator.runtimeAnimatorController = movement.unarmed;
+                if (rightHandEquip)
+                {
+                    Destroy(rightHandEquip.gameObject);
+                    rightHandEquip = null;
+                }
+                if (leftHandEquip)
+                {
+                    Destroy(leftHandEquip.gameObject);
+                    leftHandEquip = null;
+                }
+                
+                break;
             case PickupType.WEAPON_SWORDNBOARD:
                 spawnedWeapon = Instantiate(oneHandedSword, rightSocketLocation.transform);
                 rightHandEquip = spawnedWeapon;
@@ -69,6 +90,8 @@ public class WeaponHolder : MonoBehaviour
                 rightHandEquip.GetComponent<Weapon>().player = transform;
                 break;
         }
+
+        equipNewWeapon?.Invoke(type);
     }
 
     public void EquippedWeaponAttack(string forceDamage)

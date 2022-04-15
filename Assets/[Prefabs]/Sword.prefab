@@ -565,6 +565,8 @@ MonoBehaviour:
   force: 5
   player: {fileID: 0}
   damage: 10
+  durability: 0
+  durabilityMax: 100
 --- !u!1 &5593832023739347446
 GameObject:
   m_ObjectHideFlags: 0

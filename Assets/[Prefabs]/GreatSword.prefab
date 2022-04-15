@@ -49,6 +49,8 @@ MonoBehaviour:
   force: 10
   player: {fileID: 0}
   damage: 25
+  durability: 0
+  durabilityMax: 100
 --- !u!136 &6646495886661243708
 CapsuleCollider:
   m_ObjectHideFlags: 0

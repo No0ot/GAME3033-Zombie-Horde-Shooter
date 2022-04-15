@@ -42,7 +42,8 @@ public class EnemyScript : Entity
     {
         if (canBeHit)
         {
-            GetComponent<EnemyAttackScript>().StopAttacking();
+            EnemyAttackScript temp = GetComponent<EnemyAttackScript>();
+            temp.StopAttacking();
             animator.SetBool("IsAttacking", false);
             canAttack = false;
             canBeHit = false;

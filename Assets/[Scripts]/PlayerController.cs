@@ -27,9 +27,12 @@ public class PlayerController : Entity
 
     private void Update()
     {
-        if(energy < 100f)
+        if (!isAttacking)
         {
-            energy = Mathf.Clamp(energy + energyRegenRate * Time.deltaTime, 0.0f, 100f);
+            if (energy < 100f)
+            {
+                energy = Mathf.Clamp(energy + energyRegenRate * Time.deltaTime, 0.0f, 100f);
+            }
         }
     }
 }

@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4542099808053891049}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 12.98, z: 0}
+  m_LocalPosition: {x: 0, y: 28.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5317282307511388319}
@@ -140,7 +140,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 20
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -208,9 +208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b562200c378bfc48a6f368c2281bed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 10
+  walkSpeed: 8
   runSpeed: 14
   jumpForce: 5
+  unarmed: {fileID: 22100000, guid: 5679993beb4b8144dae6afdc41acd0c3, type: 2}
   twohanded: {fileID: 22100000, guid: 23ad66a0b3c95054494e5d5e65d6fbc5, type: 2}
   swordnboard: {fileID: 22100000, guid: 937dc6ffe898a2645aefcc1214987b36, type: 2}
   applyMeshMotion: 0
@@ -237,7 +238,7 @@ MonoBehaviour:
   isJumping: 0
   isRunning: 0
   isBlocking: 0
-  energyRegenRate: 5
+  energyRegenRate: 10
 --- !u!136 &5317282307511388317
 CapsuleCollider:
   m_ObjectHideFlags: 0
