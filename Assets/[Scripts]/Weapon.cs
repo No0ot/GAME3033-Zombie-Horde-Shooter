@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
 
     public float durability;
     public float durabilityMax;
+    public float durabilityDecrementAmount;
 
     SoundManager soundManager;
 
@@ -47,7 +48,7 @@ public class Weapon : MonoBehaviour
 
     void DamageWeapon()
     {
-        durability -= 4;
+        durability -= durabilityDecrementAmount;
         if(durability <= 0)
         {
             AudioSource.PlayClipAtPoint(soundManager.GetSound("WeaponBreak"), transform.position);

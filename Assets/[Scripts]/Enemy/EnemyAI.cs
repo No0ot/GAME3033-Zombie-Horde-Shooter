@@ -137,7 +137,7 @@ public class EnemyAI : MonoBehaviour
         return finalPosition;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         //if (state == AIState.PATROL)
         //{

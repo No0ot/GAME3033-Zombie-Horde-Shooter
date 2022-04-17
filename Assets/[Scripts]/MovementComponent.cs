@@ -73,6 +73,13 @@ public class MovementComponent : MonoBehaviour
                 rigidbody.AddForce(movementDirection, ForceMode.Force);
             }
         }
+        else
+        {
+            if (rigidbody.velocity.magnitude < (currentSpeed / 4))
+            {
+                rigidbody.AddForce(movementDirection, ForceMode.Force);
+            }
+        }
 
        float relativeZVelocity = Vector3.Dot(rigidbody.velocity, transform.forward);
        float relativeXVelocity = Vector3.Dot(rigidbody.velocity, transform.right);
@@ -195,6 +202,14 @@ public class MovementComponent : MonoBehaviour
                 temp.Use();
             }
         }
+    }
+
+    public void OnPause(InputValue value)
+    {
+        if (!GameManager.instance.isPaused)
+            GameManager.instance.PauseGame();
+        else
+            GameManager.instance.ResumeGame();
     }
 
     private void OnCollisionStay(Collision collision)
