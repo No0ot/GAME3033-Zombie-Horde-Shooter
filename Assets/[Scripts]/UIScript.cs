@@ -20,6 +20,9 @@ public class UIScript : MonoBehaviour
     public Sprite swordSprite;
     public Sprite claymoreSprite;
 
+    public TMP_Text waveNum;
+    public TMP_Text zombieNum;
+
     private void Awake()
     {
         weaponHolder = player.GetComponent<WeaponHolder>();
@@ -34,6 +37,9 @@ public class UIScript : MonoBehaviour
         healthBar.value = player.health / player.maxHealth;
         if (equippedWeapon)
             weaponDurability.value = equippedWeapon.durability / equippedWeapon.durabilityMax;
+
+        waveNum.text = "Wave:" + EnemyManager.instance.waveNum;
+        zombieNum.text = "Zombies:" + EnemyManager.instance.numActiveZombies;
     }
 
     void UpdateWeaponUI(PickupType type)

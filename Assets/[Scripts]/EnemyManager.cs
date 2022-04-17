@@ -10,7 +10,10 @@ public class EnemyManager : MonoBehaviour
 
     public List<GameObject> enemyList = new List<GameObject>();
 
-    public int maxZombieCount;
+    public int waveNum = 1;
+
+    public int maxZombieCountInWave;
+    public int numWaveZombiesSpawned;
     public int numActiveZombies;
 
     private void Awake()
@@ -20,6 +23,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject GetEnemy()
     {
         numActiveZombies++;
+        numWaveZombiesSpawned++;
         foreach (GameObject enemy in enemyList)
         {
             if (!enemy.activeInHierarchy)
@@ -40,4 +44,21 @@ public class EnemyManager : MonoBehaviour
         return temp;
     }
 
+    public void CheckWave()
+    {
+        if(numWaveZombiesSpawned == maxZombieCountInWave)
+        {
+            if(numActiveZombies < 1)
+            {
+                StartNewWave();
+            }
+        }
+    }
+
+    void StartNewWave()
+    {
+        waveNum++;
+        maxZombieCountInWave += 2;
+        numWaveZombiesSpawned = 0;
+    }
 }

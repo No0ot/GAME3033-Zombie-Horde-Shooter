@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if(canSpawn && EnemyManager.instance.numActiveZombies < EnemyManager.instance.maxZombieCount)
+        if(canSpawn && EnemyManager.instance.numWaveZombiesSpawned < EnemyManager.instance.maxZombieCountInWave)
         {
             StartCoroutine(SpawnZombie());
         }

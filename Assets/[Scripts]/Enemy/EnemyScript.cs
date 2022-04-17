@@ -19,6 +19,11 @@ public class EnemyScript : Entity
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+       
+    }
+
+    private void OnEnable()
+    {
         health = maxHealth;
         canAttack = true;
     }
@@ -81,6 +86,7 @@ public class EnemyScript : Entity
     public void DeleteEntity()
     {
         EnemyManager.instance.numActiveZombies--;
+        EnemyManager.instance.CheckWave();
         gameObject.SetActive(false);
     }
 }
