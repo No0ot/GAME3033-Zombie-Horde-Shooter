@@ -12,6 +12,7 @@ public enum PickupType
 public class ItemPickup : MonoBehaviour
 {
     public PickupType type;
+    public ItemSpawner manager = null;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,6 +31,9 @@ public class ItemPickup : MonoBehaviour
                     temp.EquipWeapon(type);
                     break;
             }
+            
+            manager.manager.itemList.Remove(this);
+            manager.itemPlaced = false;
             Destroy(gameObject);
 
         }

@@ -21,8 +21,6 @@ public class Weapon : MonoBehaviour
     {
         force = newforce;
         damage = newdamage;
-        Debug.Log(force);
-        Debug.Log(damage);
         collider.enabled = true;
     }
 
@@ -46,7 +44,7 @@ public class Weapon : MonoBehaviour
 
     void DamageWeapon()
     {
-        durability -= 5;
+        durability -= 4;
         if(durability <= 0)
         {
             player.GetComponent<WeaponHolder>().EquipWeapon(PickupType.NONE);

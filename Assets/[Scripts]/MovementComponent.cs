@@ -20,6 +20,8 @@ public class MovementComponent : MonoBehaviour
     public RuntimeAnimatorController twohanded;
     public RuntimeAnimatorController swordnboard;
     bool shield = true;
+    bool canGetHit = true;
+    
 
     public bool applyMeshMotion;
 
@@ -29,6 +31,7 @@ public class MovementComponent : MonoBehaviour
     Vector2 lookInput = Vector2.zero;
     public GameObject followTarget;
     public GameObject interactObject;
+    WeaponHolder weapon;
 
     // animator hashes
     public readonly int movementXHash = Animator.StringToHash("MoveX");
@@ -44,6 +47,7 @@ public class MovementComponent : MonoBehaviour
         controller = GetComponent<PlayerController>();
         animator = GetComponentInChildren<Animator>();
         //animator.runtimeAnimatorController = swordnboard;
+        weapon = GetComponent<WeaponHolder>();
     }
 
     private void FixedUpdate()
@@ -196,14 +200,19 @@ public class MovementComponent : MonoBehaviour
         {
             if (!controller.isBlocking)
             {
-                Vector3 direction = transform.position - other.GetComponent<EnemyHand>().parent.transform.position;
-                direction = direction.normalized * 8;
+                if (canGetHit)
+                {
+                    canGetHit = false;
+                    Vector3 direction = transform.position - other.GetComponent<EnemyHand>().parent.transform.position;
+                    direction = direction.normalized * 8;
 
-                rigidbody.AddForce(direction, ForceMode.Impulse);
-                controller.TakeDamage(5);
-                Debug.Log("zombie hit");
+                    rigidbody.AddForce(direction, ForceMode.Impulse);
+                    controller.TakeDamage(5);
+                    StartCoroutine(RecoverFromHit());
+                    Debug.Log("zombie hit");
+                }
             }
-            else
+            else if(weapon.rightHandEquip)
             {
                 Vector3 direction = transform.position - other.GetComponent<EnemyHand>().parent.transform.position;
                 direction = direction.normalized * 5;
@@ -221,5 +230,11 @@ public class MovementComponent : MonoBehaviour
     public void TurnOffMotion()
     {
         applyMeshMotion = false;
+    }
+
+    IEnumerator RecoverFromHit()
+    {
+        yield return new WaitForSeconds(1f);
+        canGetHit = true;
     }
 }

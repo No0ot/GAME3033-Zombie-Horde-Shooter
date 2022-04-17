@@ -26,8 +26,6 @@ public class WeaponHolder : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //GameObject spawnedWeapon = Instantiate(weaponToSpawn, rightSocketLocation.transform);
-       // GameObject leftspawnedWeapon = Instantiate(leftWeaponSpawn, leftSocketLocation.transform.position, leftSocketLocation.transform.rotation, leftSocketLocation.transform);
         animator = GetComponentInChildren<Animator>();
         movement = GetComponent<MovementComponent>();
         controller = GetComponent<PlayerController>();
