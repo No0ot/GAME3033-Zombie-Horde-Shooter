@@ -14,12 +14,18 @@ public class EnemyScript : Entity
     public bool canAttack = true;
     bool isDead = false;
 
+    public SoundManager soundManager;
+    AudioSource source;
+
+    bool soundCoroutineRunning = false;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
-       
+        soundManager = GameObject.Find("EnemySoundManager").GetComponent<SoundManager>();
+        source = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -41,6 +47,10 @@ public class EnemyScript : Entity
             animator.SetBool("IsAttacking", false);
             animator.SetBool("IsDead", true);
         }
+        if(!soundCoroutineRunning)
+        {
+            StartCoroutine(PlayRandomPatrolSound());
+        }
     }
 
     public void GetHit(Vector3 forceDirection, float damage)
@@ -57,6 +67,7 @@ public class EnemyScript : Entity
             rigidbody.isKinematic = false;
             TakeDamage(damage);
 
+            PlaySound("GetHit");
             rigidbody.AddForce(forceDirection, ForceMode.Impulse);
             animator.SetTrigger("GetHit");
         }
@@ -88,6 +99,29 @@ public class EnemyScript : Entity
         EnemyManager.instance.numActiveZombies--;
         EnemyManager.instance.CheckWave();
         gameObject.SetActive(false);
+    }
+
+    public void PlaySound(string name)
+    {
+
+            source.clip = soundManager.GetSound(name);
+            source.Play();
+        
+    }
+
+    IEnumerator PlayRandomPatrolSound()
+    {
+        soundCoroutineRunning = true;
+        float rand = Random.Range(5f, 20f);
+        yield return new WaitForSeconds(rand);
+        int randsound = Random.Range(0, 2);
+        Debug.Log("ZOMBIE SOUND");
+        if (randsound > 0)
+            PlaySound("PatrolSound1");
+        else
+            PlaySound("PatrolSound2");
+
+        soundCoroutineRunning = false;
     }
 }
 

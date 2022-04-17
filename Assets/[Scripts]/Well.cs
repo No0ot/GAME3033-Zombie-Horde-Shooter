@@ -8,7 +8,12 @@ public class Well : MonoBehaviour
     public bool canUse = true;
 
     bool playerInRange;
+    SoundManager soundManager;
 
+    private void Awake()
+    {
+        soundManager = GameObject.Find("InteractSoundManager").GetComponent<SoundManager>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,6 +35,7 @@ public class Well : MonoBehaviour
     public void Use()
     {
         effects.SetActive(false);
+        AudioSource.PlayClipAtPoint(soundManager.GetSound("WellUse"), transform.position);
         StartCoroutine(Refresh());
     }
 

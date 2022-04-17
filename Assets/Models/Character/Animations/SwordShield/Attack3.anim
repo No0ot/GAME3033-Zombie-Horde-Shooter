@@ -55660,6 +55660,20 @@ AnimationClip:
     floatParameter: 8
     intParameter: 0
     messageOptions: 0
+  - time: 0.06666667
+    functionName: PlaySound
+    data: SwordSwing
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.1
+    functionName: PlaySound
+    data: Attack3
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.43333334
     functionName: EquippedWeaponAttack
     data: 10;20

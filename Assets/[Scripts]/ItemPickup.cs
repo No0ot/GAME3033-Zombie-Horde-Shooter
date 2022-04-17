@@ -14,6 +14,13 @@ public class ItemPickup : MonoBehaviour
     public PickupType type;
     public ItemSpawner manager = null;
 
+    SoundManager soundManager;
+
+    private void Awake()
+    {
+        soundManager = GameObject.Find("InteractSoundManager").GetComponent<SoundManager>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
@@ -31,7 +38,7 @@ public class ItemPickup : MonoBehaviour
                     temp.EquipWeapon(type);
                     break;
             }
-            
+            AudioSource.PlayClipAtPoint(soundManager.GetSound("WeaponEquip"), transform.position);
             manager.manager.itemList.Remove(this);
             manager.itemPlaced = false;
             Destroy(gameObject);

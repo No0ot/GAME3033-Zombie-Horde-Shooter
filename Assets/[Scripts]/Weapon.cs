@@ -12,9 +12,12 @@ public class Weapon : MonoBehaviour
     public float durability;
     public float durabilityMax;
 
+    SoundManager soundManager;
+
     private void Awake()
     {
         durability = durabilityMax;
+        soundManager = GameObject.Find("InteractSoundManager").GetComponent<SoundManager>();
     }
 
     public void Attack(float newforce, float newdamage)
@@ -35,7 +38,7 @@ public class Weapon : MonoBehaviour
         {
             Vector3 direction = other.gameObject.transform.position - player.position ;
             direction = direction.normalized * force;
-
+            AudioSource.PlayClipAtPoint(soundManager.GetSound("SwordHit"), transform.position, 5.0f);
             EnemyScript temp = other.GetComponent<EnemyScript>();
             temp.GetHit(direction, damage);
             DamageWeapon();
@@ -47,6 +50,7 @@ public class Weapon : MonoBehaviour
         durability -= 4;
         if(durability <= 0)
         {
+            AudioSource.PlayClipAtPoint(soundManager.GetSound("WeaponBreak"), transform.position);
             player.GetComponent<WeaponHolder>().EquipWeapon(PickupType.NONE);
         }
     }

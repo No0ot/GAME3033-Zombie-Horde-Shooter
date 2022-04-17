@@ -52771,6 +52771,13 @@ AnimationClip:
     floatParameter: 2
     intParameter: 0
     messageOptions: 0
+  - time: 0.06666667
+    functionName: PlaySound
+    data: SwordSwing
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.5
     functionName: EquippedWeaponAttack
     data: 5;10

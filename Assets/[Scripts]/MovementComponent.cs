@@ -32,6 +32,9 @@ public class MovementComponent : MonoBehaviour
     public GameObject followTarget;
     public GameObject interactObject;
     WeaponHolder weapon;
+    public SoundManager soundManager;
+    AudioSource audioSource;
+
 
     // animator hashes
     public readonly int movementXHash = Animator.StringToHash("MoveX");
@@ -41,6 +44,8 @@ public class MovementComponent : MonoBehaviour
     public readonly int isAttackingHash = Animator.StringToHash("IsAttacking");
     public readonly int isBlockingHash = Animator.StringToHash("IsBlocking");
 
+
+
     private void Awake()
     {
         rigidbody = GetComponentInChildren<Rigidbody>();
@@ -48,6 +53,7 @@ public class MovementComponent : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         //animator.runtimeAnimatorController = swordnboard;
         weapon = GetComponent<WeaponHolder>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -121,23 +127,29 @@ public class MovementComponent : MonoBehaviour
 
     public void OnBlock(InputValue value)
     {
-        controller.isBlocking = value.isPressed;
-        animator.SetBool(isBlockingHash, controller.isBlocking);
+        if (weapon.rightHandEquip)
+        {
+            controller.isBlocking = value.isPressed;
+            animator.SetBool(isBlockingHash, controller.isBlocking);
+        }
     }
 
     public void OnAttack(InputValue value)
     {
-        if (!controller.isAttacking)
+        if (weapon.rightHandEquip)
         {
-            if (controller.energy > 10f)
+            if (!controller.isAttacking)
             {
-                controller.isAttacking = true;
-                controller.energy -= 10f;
-                animator.SetTrigger("IsAttacking");
-            }
-            else
-                controller.isAttacking = false;
+                if (controller.energy > 10f)
+                {
+                    controller.isAttacking = true;
+                    controller.energy -= 10f;
+                    animator.SetTrigger("IsAttacking");
+                }
+                else
+                    controller.isAttacking = false;
 
+            }
         }
         
     }
@@ -204,9 +216,10 @@ public class MovementComponent : MonoBehaviour
                 {
                     canGetHit = false;
                     Vector3 direction = transform.position - other.GetComponent<EnemyHand>().parent.transform.position;
-                    direction = direction.normalized * 8;
+                    direction = direction.normalized * 5;
 
                     rigidbody.AddForce(direction, ForceMode.Impulse);
+                    PlaySound("TakeDamage");
                     controller.TakeDamage(5);
                     StartCoroutine(RecoverFromHit());
                     Debug.Log("zombie hit");
@@ -215,6 +228,7 @@ public class MovementComponent : MonoBehaviour
             else if(weapon.rightHandEquip)
             {
                 Vector3 direction = transform.position - other.GetComponent<EnemyHand>().parent.transform.position;
+                PlaySound("Block");
                 direction = direction.normalized * 5;
                 EnemyScript temp = other.GetComponent<EnemyHand>().parent.GetComponent<EnemyScript>();
                 temp.GetHit(-direction, 0);
@@ -237,4 +251,14 @@ public class MovementComponent : MonoBehaviour
         yield return new WaitForSeconds(1f);
         canGetHit = true;
     }
+
+    public void PlaySound(string name)
+    {
+        if(!audioSource.isPlaying)
+        {
+            audioSource.clip = soundManager.GetSound(name);
+            audioSource.Play();
+        }
+    }
+
 }

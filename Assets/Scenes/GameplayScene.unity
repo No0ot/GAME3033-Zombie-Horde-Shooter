@@ -991,7 +991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3913229205094043032, guid: cae20a90551bd1a4cb962916b4e0f25d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3913229205094043034, guid: cae20a90551bd1a4cb962916b4e0f25d, type: 3}
       propertyPath: m_RootOrder
@@ -5709,6 +5709,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1375183293465330948, guid: 88bfc4a41fc0bc34795ee12e0d2c81ec, type: 3}
   m_PrefabInstance: {fileID: 593950716}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &594634359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 594634361}
+  - component: {fileID: 594634360}
+  m_Layer: 0
+  m_Name: InteractSoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &594634360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594634359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93b59729f5cd7a48a0c2c7cdb22641a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - name: WeaponBreak
+    clip: {fileID: 8300000, guid: 9bd2a1c8abf3108498a5362dc8cbdf2a, type: 3}
+  - name: WeaponEquip
+    clip: {fileID: 8300000, guid: fd74e67e185c50f4a9f30d8dd674ce0f, type: 3}
+  - name: WellUse
+    clip: {fileID: 8300000, guid: 072f97fb4d8beed4c92200543cf761d7, type: 3}
+  - name: SwordHit
+    clip: {fileID: 8300000, guid: 1a7646b89808124419258f46bf71c11c, type: 3}
+--- !u!4 &594634361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594634359}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &597409790 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 116665866941950239, guid: 935cee4c9032b79479f0e7d82df72a9c, type: 3}
@@ -7189,7 +7241,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.2735849, g: 0.15356888, b: 0.15705837, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -8865,6 +8917,66 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4759098605814954297, guid: bd7b777a491da95408d55f7843f56f0e, type: 3}
   m_PrefabInstance: {fileID: 956877530}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &957148674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 957148676}
+  - component: {fileID: 957148675}
+  m_Layer: 0
+  m_Name: PlayerSoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &957148675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957148674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93b59729f5cd7a48a0c2c7cdb22641a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - name: Attack1
+    clip: {fileID: 8300000, guid: e1a7efbc5233d41429aeaba59ddef21f, type: 3}
+  - name: Attack2
+    clip: {fileID: 8300000, guid: 73f50169c49bb8e4c837bd5b3ae1a66b, type: 3}
+  - name: Attack3
+    clip: {fileID: 8300000, guid: b0b3b15a42ddd6d478db1f5ab7c2e37c, type: 3}
+  - name: SwordSwing
+    clip: {fileID: 8300000, guid: a5f88ce092171184ea062f2e9c655668, type: 3}
+  - name: ClaymoreSwing
+    clip: {fileID: 8300000, guid: 78a3a722a2db48b468d9a605787373e7, type: 3}
+  - name: Block
+    clip: {fileID: 8300000, guid: 90bbacb1a02871a438d15225cc5eef6c, type: 3}
+  - name: TakeDamage
+    clip: {fileID: 8300000, guid: 920adcb9a06f90b4984bb4651d2c6ee8, type: 3}
+  - name: FootStep
+    clip: {fileID: 8300000, guid: 899aad718c5329f4fa7dc92cc178483a, type: 3}
+--- !u!4 &957148676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957148674}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -8878,6 +8990,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194231}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8993,6 +9106,102 @@ Skybox:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
+--- !u!82 &963194231
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4169438cbe99e3749bc71099e35dab12, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &963755550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10560,6 +10769,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528f12829b860d546a1dbf781db8e1df, type: 3}
+--- !u!1 &1222077966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1222077968}
+  - component: {fileID: 1222077967}
+  m_Layer: 0
+  m_Name: EnemySoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1222077967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222077966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93b59729f5cd7a48a0c2c7cdb22641a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - name: Attack
+    clip: {fileID: 8300000, guid: 51c0a3e6a74ce4043b81be10e8361152, type: 3}
+  - name: PatrolSound1
+    clip: {fileID: 8300000, guid: fb202e27b5af56741ae04a31a6e0ea9f, type: 3}
+  - name: PatrolSound2
+    clip: {fileID: 8300000, guid: 3eef38abd5dd60b428a38916fab5edc2, type: 3}
+  - name: Die
+    clip: {fileID: 8300000, guid: e755ea893d44e0a4a9641836d28ea877, type: 3}
+  - name: GetHit
+    clip: {fileID: 8300000, guid: e46832543ebccba41ae01069f3271516, type: 3}
+--- !u!4 &1222077968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222077966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1225073807
 GameObject:
   m_ObjectHideFlags: 0
@@ -10880,7 +11143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4763833995700835930, guid: 4f79952844e2e2248a2ce923d7fec3f9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.619827
+      value: -13.3
       objectReference: {fileID: 0}
     - target: {fileID: 4763833995700835930, guid: 4f79952844e2e2248a2ce923d7fec3f9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19356,6 +19619,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5317282307511388387, guid: 8494a9965bbd1004c8721a1648bd9b30, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 957148675}
+    - target: {fileID: 6338556900132071285, guid: 8494a9965bbd1004c8721a1648bd9b30, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 899aad718c5329f4fa7dc92cc178483a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8494a9965bbd1004c8721a1648bd9b30, type: 3}
 --- !u!1001 &7123812645507526974
