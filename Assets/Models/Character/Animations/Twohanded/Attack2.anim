@@ -57714,7 +57714,7 @@ AnimationClip:
     messageOptions: 0
   - time: 1.3333334
     functionName: EquippedWeaponAttack
-    data: 5;15
+    data: 5;20
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
