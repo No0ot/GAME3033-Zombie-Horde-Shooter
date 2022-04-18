@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayAgainButtonPressed()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("GameplayScene");
     }
 }
