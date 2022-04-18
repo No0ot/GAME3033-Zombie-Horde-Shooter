@@ -25,6 +25,12 @@ public class EnemyAI : MonoBehaviour
         controller = GetComponentInParent<EnemyScript>();
         agent = GetComponentInParent<NavMeshAgent>();
     }
+
+    private void OnEnable()
+    {
+        target = null;
+        state = AIState.IDLE;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -137,16 +143,18 @@ public class EnemyAI : MonoBehaviour
         return finalPosition;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         //if (state == AIState.PATROL)
         //{
+        if (target == null)
+        {
             if (other.CompareTag("Player"))
             {
                 state = AIState.CHASE;
                 target = other.gameObject;
-                //agent.SetDestination(target.transform.position);
             }
+        }
         //}
     }
 

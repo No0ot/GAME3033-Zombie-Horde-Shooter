@@ -30,6 +30,9 @@ public class EnemyScript : Entity
 
     private void OnEnable()
     {
+
+        canBeHit = true;
+        isDead = false;
         health = maxHealth;
         canAttack = true;
     }
@@ -115,7 +118,6 @@ public class EnemyScript : Entity
         float rand = Random.Range(5f, 20f);
         yield return new WaitForSeconds(rand);
         int randsound = Random.Range(0, 2);
-        Debug.Log("ZOMBIE SOUND");
         if (randsound > 0)
             PlaySound("PatrolSound1");
         else

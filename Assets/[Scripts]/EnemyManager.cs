@@ -57,8 +57,16 @@ public class EnemyManager : MonoBehaviour
 
     void StartNewWave()
     {
-        waveNum++;
-        maxZombieCountInWave += 2;
-        numWaveZombiesSpawned = 0;
+        if (waveNum < 5)
+        {
+            waveNum++;
+            maxZombieCountInWave += 2;
+            numWaveZombiesSpawned = 0;
+        }
+        else
+        {
+            GameManager.instance.WinGame();
+        }
+
     }
 }

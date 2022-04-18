@@ -21,7 +21,7 @@ public class MovementComponent : MonoBehaviour
     public RuntimeAnimatorController swordnboard;
     bool shield = true;
     bool canGetHit = true;
-    
+    bool isDead = false;
 
     public bool applyMeshMotion;
 
@@ -56,8 +56,22 @@ public class MovementComponent : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    private void Update()
+    {
+        if(!isDead)
+        {
+            if (controller.health <= 0)
+            {
+                animator.SetBool("IsDead", true);
+                isDead = true;
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
+        if (!isDead)
+        {
             if (controller.isJumping) return;
             if (!(inputVector.magnitude > 0))
                 moveDirection = Vector3.zero;
@@ -65,97 +79,109 @@ public class MovementComponent : MonoBehaviour
             moveDirection = transform.forward * inputVector.y + transform.right * inputVector.x;
             float currentSpeed = controller.isRunning ? runSpeed : walkSpeed;
             Vector3 movementDirection = moveDirection * (currentSpeed);
-        //transform.position += movementDirection;
-        if (!controller.isAttacking)
-        {
-            if (rigidbody.velocity.magnitude < (currentSpeed / 2))
+            //transform.position += movementDirection;
+            if (!controller.isAttacking)
             {
-                rigidbody.AddForce(movementDirection, ForceMode.Force);
+                if (rigidbody.velocity.magnitude < (currentSpeed / 2))
+                {
+                    rigidbody.AddForce(movementDirection, ForceMode.Force);
+                }
             }
-        }
-        else
-        {
-            if (rigidbody.velocity.magnitude < (currentSpeed / 4))
+            else
             {
-                rigidbody.AddForce(movementDirection, ForceMode.Force);
+                if (rigidbody.velocity.magnitude < (currentSpeed / 4))
+                {
+                    rigidbody.AddForce(movementDirection, ForceMode.Force);
+                }
             }
+
+            float relativeZVelocity = Vector3.Dot(rigidbody.velocity, transform.forward);
+            float relativeXVelocity = Vector3.Dot(rigidbody.velocity, transform.right);
+
+
+            followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.x, Vector3.up);
+            followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.y, Vector3.left);
+
+            var angles = followTarget.transform.localEulerAngles;
+            angles.z = 0;
+
+            var angle = followTarget.transform.localEulerAngles.x;
+
+            if (angle > 180 && angle < 340)
+            {
+                angles.x = 340;
+            }
+            else if (angle < 180 && angle > 40)
+            {
+                angles.x = 40;
+            }
+
+            followTarget.transform.localEulerAngles = angles;
+
+            transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
+
+            followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
+
+            Vector3 temp = rigidbody.velocity;
+            temp.Normalize();
+
+            animator.SetFloat(movementXHash, relativeXVelocity);
+            animator.SetFloat(movementYHash, relativeZVelocity);
         }
-
-       float relativeZVelocity = Vector3.Dot(rigidbody.velocity, transform.forward);
-       float relativeXVelocity = Vector3.Dot(rigidbody.velocity, transform.right);
-
-
-        followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.x, Vector3.up);
-        followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.y, Vector3.left);
-
-        var angles = followTarget.transform.localEulerAngles;
-        angles.z = 0;
-
-        var angle = followTarget.transform.localEulerAngles.x;
-
-        if(angle > 180 && angle < 340)
-        {
-            angles.x = 340;
-        }
-        else if(angle < 180 && angle > 40)
-        {
-            angles.x = 40;
-        }
-
-        followTarget.transform.localEulerAngles = angles;
-
-        transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
-
-        followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
-
-        Vector3 temp = rigidbody.velocity;
-        temp.Normalize();
-
-        animator.SetFloat(movementXHash, relativeXVelocity);
-        animator.SetFloat(movementYHash, relativeZVelocity);
     }
 
     public void OnLook(InputValue value)
     {
-        lookInput = value.Get<Vector2>();
+        if(!isDead)
+            lookInput = value.Get<Vector2>();
     }
 
     public void OnMovement(InputValue value)
     {
-        inputVector = value.Get<Vector2>();
+        if (!isDead)
+            inputVector = value.Get<Vector2>();
         
     }
 
     public void OnRun(InputValue value)
     {
-        controller.isRunning = value.isPressed;
-        animator.SetBool(isRunningHash, controller.isRunning);
+        if (!isDead)
+        {
+            controller.isRunning = value.isPressed;
+            animator.SetBool(isRunningHash, controller.isRunning);
+        }
     }
 
     public void OnBlock(InputValue value)
     {
-        if (weapon.rightHandEquip)
+        if (!isDead)
         {
-            controller.isBlocking = value.isPressed;
-            animator.SetBool(isBlockingHash, controller.isBlocking);
+            if (weapon.rightHandEquip)
+            {
+                controller.isBlocking = value.isPressed;
+                animator.SetBool(isBlockingHash, controller.isBlocking);
+            }
         }
     }
 
     public void OnAttack(InputValue value)
     {
-        if (weapon.rightHandEquip)
+        if (!isDead)
         {
-            if (!controller.isAttacking)
+            if (weapon.rightHandEquip)
             {
-                if (controller.energy > 10f)
+                if (!controller.isAttacking)
                 {
-                    controller.isAttacking = true;
-                    controller.energy -= 10f;
-                    animator.SetTrigger("IsAttacking");
-                }
-                else
-                    controller.isAttacking = false;
+                    if (controller.energy > 10f)
+                    {
+                        controller.isAttacking = true;
+                        controller.energy -= 10f;
+                        animator.SetTrigger("IsAttacking");
+                    }
+                    else
+                        controller.isAttacking = false;
 
+                }
             }
         }
         
@@ -163,10 +189,13 @@ public class MovementComponent : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
-        if (!controller.isJumping)
+        if (!isDead)
         {
-            
-            animator.SetBool(isJumpingHash, value.isPressed);
+            if (!controller.isJumping)
+            {
+
+                animator.SetBool(isJumpingHash, value.isPressed);
+            }
         }
     }
 
@@ -192,24 +221,30 @@ public class MovementComponent : MonoBehaviour
 
     public void OnInteract(InputValue value)
     {
-        if(interactObject)
+        if (!isDead)
         {
-            Well temp = interactObject.GetComponent<Well>();
-            if(temp.canUse)
+            if (interactObject)
             {
-                controller.TakeDamage(-25);
-                temp.canUse = false;
-                temp.Use();
+                Well temp = interactObject.GetComponent<Well>();
+                if (temp.canUse)
+                {
+                    controller.TakeDamage(-25);
+                    temp.canUse = false;
+                    temp.Use();
+                }
             }
         }
     }
 
     public void OnPause(InputValue value)
     {
-        if (!GameManager.instance.isPaused)
-            GameManager.instance.PauseGame();
-        else
-            GameManager.instance.ResumeGame();
+        if (!isDead)
+        {
+            if (!GameManager.instance.isPaused)
+                GameManager.instance.PauseGame();
+            else
+                GameManager.instance.ResumeGame();
+        }
     }
 
     private void OnCollisionStay(Collision collision)
@@ -235,9 +270,9 @@ public class MovementComponent : MonoBehaviour
 
                     rigidbody.AddForce(direction, ForceMode.Impulse);
                     PlaySound("TakeDamage");
-                    controller.TakeDamage(5);
+                    controller.TakeDamage(4);
                     StartCoroutine(RecoverFromHit());
-                    Debug.Log("zombie hit");
+                    //Debug.Log("zombie hit");
                 }
             }
             else if(weapon.rightHandEquip)
@@ -274,6 +309,11 @@ public class MovementComponent : MonoBehaviour
             audioSource.clip = soundManager.GetSound(name);
             audioSource.Play();
         }
+    }
+
+    public void LoseGame()
+    {
+        GameManager.instance.LoseGame();
     }
 
 }

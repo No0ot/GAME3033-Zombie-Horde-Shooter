@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     public GameObject inGameUI;
     public GameObject pauseMenu;
+
+    public GameObject winMenu;
+    public GameObject loseMenu;
 
     public bool isPaused = false;
     private void Awake()
@@ -31,5 +34,26 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(true);
         isPaused = false;
         Cursor.visible = false;
+    }
+
+    public void WinGame()
+    {
+        Time.timeScale = 0;
+        inGameUI.SetActive(false);
+        Cursor.visible = true;
+        winMenu.SetActive(true);
+    }
+
+    public void LoseGame()
+    {
+        Time.timeScale = 0;
+        inGameUI.SetActive(false);
+        Cursor.visible = true;
+        loseMenu.SetActive(true);
+    }
+
+    public void PlayAgainButtonPressed()
+    {
+        SceneManager.LoadScene("GameplayScene");
     }
 }
